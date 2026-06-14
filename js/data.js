@@ -19,10 +19,11 @@ const EVENTS = [
     date: "jeden Donnerstag",
     time: "20:00",
     location: "Lucky Punch Comedy Club Wien",
-    price: "7.9€",
+    price: "7.90€",
     description:
       "Erlebe hautnah, wie Profis und Newcomer ihre brandneuen Jokes zum allerersten Mal testen. Dauer 90 Minuten mit Pause.",
-    image: "Pics/Stand_up_Comedy_OPEN_MIC_2_tickets_2026_c_Markus_Waches_222.jpg"
+    image: "Pics/Stand_up_Comedy_OPEN_MIC_2_tickets_2026_c_Markus_Waches_222.jpg",
+    tokenCost: "3 &#129689;"
   },
   {
     id: "evt-002",
@@ -34,7 +35,8 @@ const EVENTS = [
     price: "9€",
     description:
       "Da war ich schon mal, war geil, mach mit wenn du bereit bist selber auf die Bühne zu gehen!",
-    image: "Pics/Vienna_s_Weekly_Improv_Comedy_Show_tickets_2025_c_American_Improv_Conservatory_222.jpg"
+    image: "Pics/Vienna_s_Weekly_Improv_Comedy_Show_tickets_2025_c_American_Improv_Conservatory_222.jpg",
+    tokenCost: "3 &#129689;"
   },
   {
     id: "evt-003",
@@ -43,58 +45,50 @@ const EVENTS = [
     date: "jeden Freitag und Samstag",
     time: "20:00",
     location: "Lucky Punch Comedy Club Wien",
-    price: "26.4€",
+    price: "26.40€",
     description:
       "Authentische Primetime Mixed Show mit den angesagtesten Stand up Comedians aus Wien und dem gesamten deutschsprachigen Raum, rohe Gags und lebendige Clubatmosphaere.",
-    image: "Pics/Stand-up_Comedy_Mixed_Show_c_LP_222.jpg"
+    image: "Pics/Stand-up_Comedy_Mixed_Show_c_LP_222.jpg",
+    tokenCost: "9 &#129689;"
   },
   {
     id: "evt-004",
     title: "Peter Filzmaier & Armin Wolf - 'Der Professor und der Wolf'",
     category: "Experience",
-    date: "2026-09-06,2026-11-15",
+    date: ["2026-09-06","2026-11-15"],
     time: "19:30",
     location: "Theater im Park, Globe Wien (Marx Halle)",
-    price: "26.4€",
+    price: "26.40€",
     description:
       "Im Fernsehen reden sie über Politik. Nie über Sport. Dabei weiß Peter über Sport fast noch mehr als über Politik. Armin ist es ein Rätsel, wie man sich für Sport überhaupt interessieren kann. Außer für Curling. Aber das verachtet Peter. Auf der Bühne werden sie trotzdem ein wenig über Sport reden, viel über Politik und übereinander. Wie immer ziemlich schnell.",
-    image: "Pics/Peter_Filzmaier_und_Armin_Wolf_-_Der_Professor_und_der_Wolf_-_c_Clemens_Fantur_FM4_-_222.jpg"
+    image: "Pics/Peter_Filzmaier_und_Armin_Wolf_-_Der_Professor_und_der_Wolf_-_c_Clemens_Fantur_FM4_-_222.jpg",
+    tokenCost: "9 &#129689;"
   },
   {
     id: "evt-005",
     title: "Yorick Thiede - Polygon",
     category: "Comedy",
-    date: "2026-11-26,2026-11-27",
+    date: ["2026-11-26","2026-11-27"],
     time: "19:30",
     location: "Kabarett Niedermair",
-    price: "34.4€",
+    price: "34.40€",
     description:
       "Schlechte Pressetexte würden sagen: 'Ein Potpourri der guten Laune!' Aber zu Künstlern, die sowas sagen, will man ja nicht hin. Kommt hier hin! Das wird super.",
-    image: "Pics/Yorick_Thiede_-_Polygon_tickets_2026_c_Simon_Redel_m.jpg"
+    image: "Pics/Yorick_Thiede_-_Polygon_tickets_2026_c_Simon_Redel_m.jpg",
+    tokenCost: "11 &#129689;"
   },
   {
     id: "evt-006",
     title: "Dr. Bohl - Solo",
     category: "Comedy",
-    date: "2026-08-06, 2026-10-18, 2026-10-27, 2026-11-09, 2026-11-27, 2026-11-29, 2026-12-14",
+    date: ["2026-08-06", "2026-10-18", "2026-10-27", "2026-11-09", "2026-11-27", "2026-11-29", "2026-12-14"],
     time: "19:30",
     location: "Theater im Park, Stadtsaal,, Globe Wien (Marx Halle)",
     price: "35€",
     description:
       "Paulus geht in seinem Solo-Programm humorvoll seinen Tinder-Date-Erfahrungen und persönlichen Geschichten auf den Grund.",
-    image: "Pics/dr-bohl-solo-c-mutter-bohl-m.jpg"
-  },
-  {
-    id: "evt-007",
-    title: "Comedy Roast: Local Legends",
-    category: "Comedy",
-    date: "2026-08-14",
-    time: "20:30",
-    location: "Stadtsaal, Vienna",
-    price: "€24",
-    description:
-      "Four comedians take turns roasting each other — and the city itself — in front of a rowdy crowd.",
-    image: ""
+    image: "Pics/dr-bohl-solo-c-mutter-bohl-m.jpg",
+    tokenCost: "12 &#129689;"
   },
   {
     id: "evt-008",
@@ -103,26 +97,15 @@ const EVENTS = [
     date: "2026-10-08",
     time: "20:00",
     location: "Flex",
-    price: "37.9€",
+    price: "37.90€",
     description:
       "Lieber Tour ich weiter.",
-    image: "Pics/Cosmo-Lieber-Tour-ich-weiter-2026-tickets-m.jpg"
-  },
-  {
-    id: "evt-009",
-    title: "Derby Day: Local Football Showdown",
-    category: "Sports",
-    date: "2026-07-30",
-    time: "17:00",
-    location: "Allianz Stadion, Vienna",
-    price: "€32",
-    description:
-      "A high-stakes local derby with two rival fan blocks, a packed stadium, and fireworks before kickoff.",
-    image: ""
+    image: "Pics/Cosmo-Lieber-Tour-ich-weiter-2026-tickets-m.jpg",
+    tokenCost: "13 &#129689;"
   },
   {
     id: "evt-010",
-    title: "Theatre: A Modern Retelling of Orpheus",
+    title: "Zimmer90",
     category: "Theatre",
     date: "2026-11-08",
     time: "20:00",
@@ -130,31 +113,34 @@ const EVENTS = [
     price: "39.95€",
     description:
       "Arthouse Tour.",
-    image: "Pics/Zimmer90.png"
+    image: "Pics/Zimmer90.png",
+    tokenCost: "13 &#129689;"
   },
   {
     id: "evt-011",
     title: "The Jury Experience: Diamanten, Lügen und ein toter Mann",
     category: "Experience",
-    date: "2026-07-17,2026-09-04,2026-10-04,2026-11-08",
+    date: ["2026-07-17","2026-09-04","2026-10-04","2026-11-08"],
     time: "18:00, 20:30",
     location: "Lorely Saal, Penzinger Straße",
     price: "40€",
     description:
       "Die 20-Millionen-Dollar-Halskette von Superstar Lana Tonneti ist verschwunden. Jetzt steht ihr Ex-Fahrer wegen Diebstahls vor Gericht. Aber steckt mehr hinter dieser Geschichte?",
-    image: "Pics/8a1c2652-127c-11f1-92b2-b2434481c692.jpg"
+    image: "Pics/8a1c2652-127c-11f1-92b2-b2434481c692.jpg",
+    tokenCost: "13 &#129689;"
   },
   {
     id: "evt-012",
     title: "The Jury Experience: Tod durch KI: Wer zahlt den Preis?",
     category: "Experience",
-    date: "2026-07-23,2026-08-22,2026-09-11,2026-10-11,2026-11-14",
+    date: ["2026-07-23", "2026-08-22", "2026-09-11", "2026-10-11", "2026-11-14"],
     time: "18:00, 20:30",
     location: "Lorely Saal, Penzinger Straße",
     price: "40€",
     description:
       "Ein selbstfahrendes Auto. Ein Mensch stirbt. Und eine Frage, die noch kein Gericht beantworten musste: Wer muss zahlen, wenn die Technik vor Gericht steht?",
-    image: "Pics/f9ecd48a-26d7-11f1-b81d-fa31ec36ed6c.jpg"
+    image: "Pics/f9ecd48a-26d7-11f1-b81d-fa31ec36ed6c.jpg",
+    tokenCost: "13 &#129689;"
   },
   {
     id: "evt-013",
@@ -166,7 +152,8 @@ const EVENTS = [
     price: "40€",
     description:
       "Eine Freundesgruppe war auf einem Schnellboot unterwegs, als es zu einem schlimmen Unfall kam. War es vielleicht ein mutwilliger Mord?",
-    image: "Pics/94e2e4c8-1271-11f1-9fde-5a92634d281f.jpg"
+    image: "Pics/94e2e4c8-1271-11f1-9fde-5a92634d281f.jpg",
+    tokenCost: "13 &#129689;"
   },
   {
     id: "evt-014",
@@ -178,7 +165,8 @@ const EVENTS = [
     price: "42.15€",
     description:
       "Wir waren hier Tour.",
-    image: "Pics/Oswald.png"
+    image: "Pics/Oswald.png",
+    tokenCost: "14 &#129689;"
   },
   {
     id: "evt-015",
@@ -190,7 +178,8 @@ const EVENTS = [
     price: "45.49€",
     description:
       "auch wenn's uns morgen nicht mehr gibt Tour.",
-    image: "Pics/tjaark-neutral-2026-222.jpg"
+    image: "Pics/tjaark-neutral-2026-222.jpg",
+    tokenCost: "15 &#129689;"
   },
   {
     id: "evt-016",
@@ -202,7 +191,8 @@ const EVENTS = [
     price: "50.40€",
     description:
       "In seinem neuen Programm geht er wieder genau dorthin, wo er am stärksten ist: mitten in unseren Alltag, mitten in unsere Leben, mitten in unsere Köpfe.",
-    image: "Pics/Schmitz.png"
+    image: "Pics/Schmitz.png",
+    tokenCost: "17 &#129689;"
   },
   {
     id: "evt-017",
@@ -214,6 +204,7 @@ const EVENTS = [
     price: "70.40€",
     description:
       "Jungle sind im November 2026 zurück und machen mit Special Guest Rio Kosta Halt in der Wiener Stadthalle.",
-    image: "Pics/Jungle_c-Mason-Rose_tickets-2026-m.jpg"
+    image: "Pics/Jungle_c-Mason-Rose_tickets-2026-m.jpg",
+    tokenCost: "25 &#129689;"
   }
 ];

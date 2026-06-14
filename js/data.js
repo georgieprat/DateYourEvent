@@ -14,75 +14,75 @@
 const EVENTS = [
   {
     id: "evt-001",
-    title: "Vienna Sessions: Late Night Jazz",
-    category: "Music",
-    date: "2026-07-03",
-    time: "20:30",
-    location: "Porgy & Bess, Vienna",
-    price: "€28",
+    title: "Stand-up Comedy Open Mic",
+    category: "Comedy",
+    date: "jeden Donnerstag",
+    time: "20:00",
+    location: "Lucky Punch Comedy Club Wien",
+    price: "7.9€",
     description:
-      "An intimate jazz club night with a rotating quartet of local and touring musicians. Expect long improvisations and a smoky, low-lit room.",
-    image: ""
+      "Erlebe hautnah, wie Profis und Newcomer ihre brandneuen Jokes zum allerersten Mal testen. Dauer 90 Minuten mit Pause.",
+    image: "Pics/Stand_up_Comedy_OPEN_MIC_2_tickets_2026_c_Markus_Waches_222.jpg"
   },
   {
     id: "evt-002",
-    title: "Open Air: Electro Pop Festival",
-    category: "Music",
-    date: "2026-07-18",
-    time: "16:00",
-    location: "Donauinsel, Vienna",
-    price: "€55",
+    title: "Vienna's Weekly Improv Comedy Show",
+    category: "Comedy",
+    date: "jeden Montag",
+    time: "19:30",
+    location: "AERA",
+    price: "9€",
     description:
-      "A full-day outdoor festival with three stages, food trucks, and a lineup of electro-pop acts running well past midnight.",
-    image: ""
+      "Da war ich schon mal, war geil, mach mit wenn du bereit bist selber auf die Bühne zu gehen!",
+    image: "Pics/Vienna_s_Weekly_Improv_Comedy_Show_tickets_2025_c_American_Improv_Conservatory_222.jpg"
   },
   {
     id: "evt-003",
-    title: "Stand-Up Showdown: English Open Mic",
+    title: "Stand-up Comedy Mixed Show",
     category: "Comedy",
-    date: "2026-06-25",
-    time: "19:30",
-    location: "Kabarett Niedermair, Vienna",
-    price: "€12",
+    date: "jeden Freitag und Samstag",
+    time: "20:00",
+    location: "Lucky Punch Comedy Club Wien",
+    price: "26.4€",
     description:
-      "A rapid-fire English-language open mic featuring ten comedians, five minutes each. Unpredictable, occasionally brilliant.",
-    image: ""
+      "Authentische Primetime Mixed Show mit den angesagtesten Stand up Comedians aus Wien und dem gesamten deutschsprachigen Raum, rohe Gags und lebendige Clubatmosphaere.",
+    image: "Pics/Stand-up_Comedy_Mixed_Show_c_LP_222.jpg"
   },
   {
     id: "evt-004",
-    title: "Improv Night: Whose Show Is It Anyway?",
-    category: "Comedy",
-    date: "2026-07-09",
-    time: "20:00",
-    location: "Theater im Werk X, Vienna",
-    price: "€18",
+    title: "Peter Filzmaier & Armin Wolf - 'Der Professor und der Wolf'",
+    category: "Experience",
+    date: "2026-09-06,2026-11-15",
+    time: "19:30",
+    location: "Theater im Park, Globe Wien (Marx Halle)",
+    price: "26.4€",
     description:
-      "A long-form improv troupe builds an entire show from a single audience suggestion. No two nights are the same.",
-    image: ""
+      "Im Fernsehen reden sie über Politik. Nie über Sport. Dabei weiß Peter über Sport fast noch mehr als über Politik. Armin ist es ein Rätsel, wie man sich für Sport überhaupt interessieren kann. Außer für Curling. Aber das verachtet Peter. Auf der Bühne werden sie trotzdem ein wenig über Sport reden, viel über Politik und übereinander. Wie immer ziemlich schnell.",
+    image: "Pics/Peter_Filzmaier_und_Armin_Wolf_-_Der_Professor_und_der_Wolf_-_c_Clemens_Fantur_FM4_-_222.jpg"
   },
   {
     id: "evt-005",
-    title: "Immersive Art Walk: Light & Shadow",
-    category: "Art",
-    date: "2026-08-02",
-    time: "18:00",
-    location: "Kunsthalle Wien",
-    price: "€16",
+    title: "Yorick Thiede - Polygon",
+    category: "Comedy",
+    date: "2026-11-26,2026-11-27",
+    time: "19:30",
+    location: "Kabarett Niedermair",
+    price: "34.4€",
     description:
-      "A late-night opening with projection installations spread across three floors, plus a rooftop bar for in-between breaks.",
-    image: ""
+      "Schlechte Pressetexte würden sagen: 'Ein Potpourri der guten Laune!' Aber zu Künstlern, die sowas sagen, will man ja nicht hin. Kommt hier hin! Das wird super.",
+    image: "Pics/Yorick_Thiede_-_Polygon_tickets_2026_c_Simon_Redel_m.jpg"
   },
   {
     id: "evt-006",
-    title: "Late Night Chamber: Strings After Dark",
-    category: "Music",
-    date: "2026-07-11",
-    time: "21:00",
-    location: "Musikverein, Vienna",
-    price: "€40",
+    title: "Dr. Bohl - Solo",
+    category: "Comedy",
+    date: "2026-08-06, 2026-10-18, 2026-10-27, 2026-11-09, 2026-11-27, 2026-11-29, 2026-12-14",
+    time: "19:30",
+    location: "Theater im Park, Stadtsaal,, Globe Wien (Marx Halle)",
+    price: "35€",
     description:
-      "A string quartet performs a candlelit late-night program mixing baroque pieces with contemporary commissions.",
-    image: ""
+      "Paulus geht in seinem Solo-Programm humorvoll seinen Tinder-Date-Erfahrungen und persönlichen Geschichten auf den Grund.",
+    image: "Pics/dr-bohl-solo-c-mutter-bohl-m.jpg"
   },
   {
     id: "evt-007",
@@ -98,15 +98,15 @@ const EVENTS = [
   },
   {
     id: "evt-008",
-    title: "Outdoor Cinema: Cult Classics Under the Stars",
-    category: "Other",
-    date: "2026-07-25",
-    time: "21:30",
-    location: "Augarten, Vienna",
-    price: "€10",
+    title: "Cosmó",
+    category: "Music",
+    date: "2026-10-08",
+    time: "20:00",
+    location: "Flex",
+    price: "37.9€",
     description:
-      "A pop-up screen in the park shows a rotating selection of cult classics. Bring a blanket, snacks are sold on site.",
-    image: ""
+      "Lieber Tour ich weiter.",
+    image: "Pics/Cosmo-Lieber-Tour-ich-weiter-2026-tickets-m.jpg"
   },
   {
     id: "evt-009",
@@ -124,36 +124,96 @@ const EVENTS = [
     id: "evt-010",
     title: "Theatre: A Modern Retelling of Orpheus",
     category: "Theatre",
-    date: "2026-08-08",
-    time: "19:00",
-    location: "Volkstheater, Vienna",
-    price: "€38",
+    date: "2026-11-08",
+    time: "20:00",
+    location: "Ottakringer Brauerei",
+    price: "39.95€",
     description:
-      "A stripped-down, modern staging of the Orpheus myth with a single actor, a looping cello score, and minimal set design.",
-    image: ""
+      "Arthouse Tour.",
+    image: "Pics/Zimmer90.png"
   },
   {
     id: "evt-011",
-    title: "Night Market & Live Funk Sessions",
-    category: "Music",
-    date: "2026-08-21",
-    time: "18:30",
-    location: "Karmelitermarkt, Vienna",
-    price: "Free",
+    title: "The Jury Experience: Diamanten, Lügen und ein toter Mann",
+    category: "Experience",
+    date: "2026-07-17,2026-09-04,2026-10-04,2026-11-08",
+    time: "18:00, 20:30",
+    location: "Lorely Saal, Penzinger Straße",
+    price: "40€",
     description:
-      "A weekly night market with food stalls, natural wine, and a rotating live funk and soul band on a small stage.",
-    image: ""
+      "Die 20-Millionen-Dollar-Halskette von Superstar Lana Tonneti ist verschwunden. Jetzt steht ihr Ex-Fahrer wegen Diebstahls vor Gericht. Aber steckt mehr hinter dieser Geschichte?",
+    image: "Pics/8a1c2652-127c-11f1-92b2-b2434481c692.jpg"
   },
   {
     id: "evt-012",
-    title: "Sketch Comedy: The Office Files",
-    category: "Comedy",
-    date: "2026-09-05",
-    time: "20:00",
-    location: "Kulisse Wien",
-    price: "€20",
+    title: "The Jury Experience: Tod durch KI: Wer zahlt den Preis?",
+    category: "Experience",
+    date: "2026-07-23,2026-08-22,2026-09-11,2026-10-11,2026-11-14",
+    time: "18:00, 20:30",
+    location: "Lorely Saal, Penzinger Straße",
+    price: "40€",
     description:
-      "A sketch troupe satirizes corporate life with rapid scene changes, deadpan delivery, and absurd props.",
-    image: ""
+      "Ein selbstfahrendes Auto. Ein Mensch stirbt. Und eine Frage, die noch kein Gericht beantworten musste: Wer muss zahlen, wenn die Technik vor Gericht steht?",
+    image: "Pics/f9ecd48a-26d7-11f1-b81d-fa31ec36ed6c.jpg"
+  },
+  {
+    id: "evt-013",
+    title: "The Jury Experience: Tod an Backbord",
+    category: "Experience",
+    date: "2026-10-17",
+    time: "16:00, 19:00",
+    location: "Lorely Saal, Penzinger Straße",
+    price: "40€",
+    description:
+      "Eine Freundesgruppe war auf einem Schnellboot unterwegs, als es zu einem schlimmen Unfall kam. War es vielleicht ein mutwilliger Mord?",
+    image: "Pics/94e2e4c8-1271-11f1-9fde-5a92634d281f.jpg"
+  },
+  {
+    id: "evt-014",
+    title: "Oswald",
+    category: "Music",
+    date: "2026-09-17",
+    time: "20:00",
+    location: "Gasometer",
+    price: "42.15€",
+    description:
+      "Wir waren hier Tour.",
+    image: "Pics/Oswald.png"
+  },
+  {
+    id: "evt-015",
+    title: "Tjark",
+    category: "Music",
+    date: "2026-09-14",
+    time: "20:00",
+    location: "Simm City Festsaal Zentrum Simmering",
+    price: "45.49€",
+    description:
+      "auch wenn's uns morgen nicht mehr gibt Tour.",
+    image: "Pics/tjaark-neutral-2026-222.jpg"
+  },
+  {
+    id: "evt-016",
+    title: "Ralf Schmitz - Schmitzmän",
+    category: "Comedy",
+    date: "2026-10-01",
+    time: "20:00",
+    location: "Wiener Stadthalle D",
+    price: "50.40€",
+    description:
+      "In seinem neuen Programm geht er wieder genau dorthin, wo er am stärksten ist: mitten in unseren Alltag, mitten in unsere Leben, mitten in unsere Köpfe.",
+    image: "Pics/Schmitz.png"
+  },
+  {
+    id: "evt-017",
+    title: "Jungle",
+    category: "Music",
+    date: "2026-11-13",
+    time: "19:30",
+    location: "Wiener Stadthalle D",
+    price: "70.40€",
+    description:
+      "Jungle sind im November 2026 zurück und machen mit Special Guest Rio Kosta Halt in der Wiener Stadthalle.",
+    image: "Pics/Jungle_c-Mason-Rose_tickets-2026-m.jpg"
   }
 ];

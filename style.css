@@ -1,0 +1,734 @@
+/* ==========================================================================
+   LINEUP — Design tokens
+   A "festival bill" aesthetic: ticket-stub cards with a torn perforation,
+   poster-style color blocking, and a ranking list that reads like a
+   lineup poster (headliner big at top, support acts smaller below).
+   ========================================================================== */
+
+:root {
+  /* Core palette */
+  --color-bg: #15302b;          /* deep pine — app background */
+  --color-bg-soft: #1f3f38;     /* lighter pine — panels, secondary buttons */
+  --color-surface: #fbf6ec;     /* ticket paper — card stubs */
+  --color-ink: #1c1b18;         /* primary text on paper */
+  --color-ink-soft: #6e6a5c;    /* secondary text on paper */
+  --color-paper-edge: #e7dfca;  /* hairlines on paper */
+
+  --color-yes: #f2b705;         /* "interested" / right swipe / marquee gold */
+  --color-no: #e8542e;          /* "pass" / left swipe / poster coral */
+  --color-accent: #4fa9a0;      /* teal — ranking accents, focus rings */
+  --color-cream-on-dark: #f4ecd8;
+
+  /* Category colors (poster panel when no image is supplied) */
+  --cat-music: #e8542e;
+  --cat-comedy: #f2b705;
+  --cat-art: #8b7ae0;
+  --cat-sports: #4fa9a0;
+  --cat-theatre: #d8607a;
+  --cat-other: #7a7660;
+
+  /* Type */
+  --font-display: 'Anton', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Layout */
+  --container-w: 520px;
+  --radius-card: 18px;
+  --shadow-card: 0 18px 40px -18px rgba(0, 0, 0, 0.45);
+}
+
+/* ==========================================================================
+   Reset & base
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-bg);
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(244, 236, 216, 0.06), transparent 45%),
+    radial-gradient(circle at 85% 100%, rgba(79, 169, 160, 0.10), transparent 50%);
+  color: var(--color-cream-on-dark);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible,
+[tabindex]:focus-visible,
+.battle-card:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   App shell & header
+   ========================================================================== */
+
+.app {
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding: 20px 18px 48px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px dashed rgba(244, 236, 216, 0.25);
+  margin-bottom: 24px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.brand-mark {
+  font-family: var(--font-display);
+  font-size: 30px;
+  letter-spacing: 0.08em;
+  color: var(--color-yes);
+}
+
+.brand-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-cream-on-dark);
+  opacity: 0.55;
+  margin-top: 4px;
+}
+
+.stepper {
+  display: flex;
+  gap: 14px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  opacity: 0.35;
+  transition: opacity 0.2s ease;
+}
+
+.step.is-active {
+  opacity: 1;
+}
+
+.step.is-done {
+  opacity: 0.7;
+}
+
+.step-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.step-label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.step.is-active .step-label {
+  color: var(--color-yes);
+}
+
+/* ==========================================================================
+   Views
+   ========================================================================== */
+
+.view {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+}
+
+.view.is-active {
+  display: flex;
+}
+
+.view-intro {
+  margin-bottom: 16px;
+}
+
+.view-intro h1 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 6vw, 34px);
+  letter-spacing: 0.01em;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+}
+
+.view-intro p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-cream-on-dark);
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   Progress bar (shared between swipe & battle)
+   ========================================================================== */
+
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.progress-track {
+  flex: 1;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(244, 236, 216, 0.12);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--color-yes);
+  border-radius: 4px;
+  transition: width 0.35s ease;
+}
+
+.progress-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Ticket card (used in swipe stack & battle arena)
+   ========================================================================== */
+
+.ticket-card {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.ticket-poster {
+  position: relative;
+  padding: 22px 20px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: var(--color-cream-on-dark);
+  background-size: cover;
+  background-position: center;
+}
+
+.ticket-poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%);
+  pointer-events: none;
+}
+
+.ticket-poster[data-category="Music"]   { background-color: var(--cat-music); }
+.ticket-poster[data-category="Comedy"]  { background-color: var(--cat-comedy); }
+.ticket-poster[data-category="Art"]     { background-color: var(--cat-art); }
+.ticket-poster[data-category="Sports"]  { background-color: var(--cat-sports); }
+.ticket-poster[data-category="Theatre"] { background-color: var(--cat-theatre); }
+.ticket-poster[data-category="Other"]   { background-color: var(--cat-other); }
+
+.ticket-category {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 6px;
+}
+
+.ticket-title {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.15;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Perforation between poster and stub */
+.ticket-perf {
+  position: relative;
+  height: 0;
+  border-top: 2px dashed rgba(28, 27, 24, 0.18);
+  margin: 0 -1px;
+}
+
+.ticket-perf::before,
+.ticket-perf::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-bg);
+}
+
+.ticket-perf::before { left: -8px; }
+.ticket-perf::after  { right: -8px; }
+
+.ticket-stub {
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ticket-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-ink-soft);
+}
+
+.ticket-meta span strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.ticket-description {
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.ticket-price {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border: 1px solid var(--color-paper-edge);
+  border-radius: 100px;
+  color: var(--color-ink);
+}
+
+/* ==========================================================================
+   VIEW 1 — Swipe
+   ========================================================================== */
+
+.card-stack {
+  position: relative;
+  flex: 1;
+  min-height: 380px;
+  margin-bottom: 18px;
+}
+
+.swipe-card {
+  position: absolute;
+  inset: 0;
+  touch-action: none;
+  will-change: transform;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s ease;
+}
+
+.swipe-card.dragging {
+  transition: none;
+}
+
+.swipe-card .ticket-card {
+  height: 100%;
+}
+
+.swipe-card .ticket-stub {
+  flex: 1;
+}
+
+.swipe-stamp {
+  position: absolute;
+  top: 26px;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 0.12em;
+  padding: 6px 16px;
+  border: 4px solid currentColor;
+  border-radius: 8px;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: rotate(-18deg);
+  pointer-events: none;
+}
+
+.swipe-stamp.stamp-yes {
+  left: 24px;
+  color: var(--color-yes);
+}
+
+.swipe-stamp.stamp-no {
+  right: 24px;
+  color: var(--color-no);
+  transform: rotate(18deg);
+}
+
+.swipe-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  padding: 6px 0 4px;
+}
+
+.control-btn {
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: 0 10px 24px -12px rgba(0,0,0,0.5);
+  transition: transform 0.15s ease;
+}
+
+.control-btn:active {
+  transform: scale(0.92);
+}
+
+.control-no, .control-yes {
+  width: 60px;
+  height: 60px;
+}
+
+.control-undo {
+  width: 44px;
+  height: 44px;
+  font-size: 18px;
+  background: var(--color-bg-soft);
+  color: var(--color-cream-on-dark);
+}
+
+.control-no { color: var(--color-no); }
+.control-yes { color: var(--color-yes); }
+
+/* ==========================================================================
+   VIEW 2 — Battle
+   ========================================================================== */
+
+.battle-arena {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.battle-card {
+  width: 100%;
+  border: none;
+  padding: 0;
+  text-align: left;
+  background: none;
+  border-radius: var(--radius-card);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+}
+
+.battle-card .ticket-card {
+  transition: outline 0.15s ease;
+}
+
+.battle-card:hover .ticket-card {
+  transform: translateY(-2px);
+}
+
+.battle-card:active {
+  transform: scale(0.985);
+}
+
+.battle-card.is-winner .ticket-card {
+  outline: 3px solid var(--color-yes);
+}
+
+.battle-card.is-loser {
+  opacity: 0.45;
+}
+
+.battle-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.battle-divider .line {
+  flex: 1;
+  height: 1px;
+  background: rgba(244, 236, 216, 0.18);
+}
+
+.battle-divider .vs {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+}
+
+.battle-footer {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0 4px;
+}
+
+/* ==========================================================================
+   VIEW 3 — Ranking ("lineup poster" bill)
+   ========================================================================== */
+
+.ranking-list {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ranking-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--color-bg-soft);
+  border: 1px solid rgba(244, 236, 216, 0.08);
+}
+
+.ranking-rank {
+  font-family: var(--font-display);
+  line-height: 1;
+  color: var(--color-yes);
+  min-width: 46px;
+  text-align: right;
+}
+
+.ranking-title {
+  font-weight: 600;
+  margin: 0 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.ranking-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--color-cream-on-dark);
+  opacity: 0.6;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.ranking-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: 2px;
+  display: block;
+}
+
+/* Poster-bill hierarchy: headliners are big, support acts shrink down */
+.ranking-item[data-tier="headliner"] {
+  background: linear-gradient(135deg, rgba(242, 183, 5, 0.16), rgba(242, 183, 5, 0.03));
+  border-color: rgba(242, 183, 5, 0.35);
+  padding: 20px 18px;
+}
+
+.ranking-item[data-tier="headliner"] .ranking-rank {
+  font-size: 38px;
+}
+
+.ranking-item[data-tier="headliner"] .ranking-title {
+  font-family: var(--font-display);
+  font-size: 19px;
+}
+
+.ranking-item[data-tier="featured"] .ranking-rank {
+  font-size: 28px;
+}
+
+.ranking-item[data-tier="featured"] .ranking-title {
+  font-size: 15px;
+}
+
+.ranking-item[data-tier="support"] .ranking-rank {
+  font-size: 20px;
+  color: var(--color-accent);
+}
+
+.ranking-item[data-tier="support"] .ranking-title {
+  font-size: 13px;
+}
+
+.ranking-item[data-tier="support"] {
+  padding: 10px 14px;
+}
+
+.ranking-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn-primary,
+.btn-secondary,
+.btn-ghost {
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 14px;
+  border-radius: 100px;
+  border: none;
+  padding: 14px 28px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--color-yes);
+  color: var(--color-ink);
+}
+
+.btn-secondary {
+  background: var(--color-bg-soft);
+  color: var(--color-cream-on-dark);
+  border: 1px solid rgba(244, 236, 216, 0.18);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-cream-on-dark);
+  opacity: 0.55;
+  padding: 10px 28px;
+}
+
+.btn-primary:active,
+.btn-secondary:active,
+.btn-ghost:active {
+  transform: scale(0.97);
+}
+
+/* ==========================================================================
+   Empty states
+   ========================================================================== */
+
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+  padding: 40px 20px;
+}
+
+.empty-state h2 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 26px;
+  margin: 0;
+}
+
+.empty-state p {
+  margin: 0;
+  opacity: 0.7;
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 320px;
+}
+
+/* ==========================================================================
+   Responsive — wider screens get a side-by-side battle arena
+   ========================================================================== */
+
+@media (min-width: 720px) {
+  .app {
+    padding-top: 32px;
+  }
+
+  .battle-arena {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .battle-divider {
+    flex-direction: column;
+    padding: 0 6px;
+  }
+
+  .battle-divider .line {
+    width: 1px;
+    height: auto;
+    flex: 1;
+  }
+
+  .card-stack {
+    min-height: 440px;
+  }
+}

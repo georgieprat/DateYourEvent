@@ -1,6 +1,6 @@
 /**
  * APP — wires everything together: loads state, decides which view to
- * show, and handles transitions between the three phases.
+ * show, and handles transitions between the four phases.
  */
 
 const App = {
@@ -10,6 +10,14 @@ const App = {
     Swipe.init();
     Battle.init();
     Ranking.init();
+    Plan.init();
+
+    document.getElementById("btn-reset-all").addEventListener("click", () => {
+      if (confirm("Reset all progress? This clears every swipe, battle result, and pick.")) {
+        State.reset();
+        this.showView("swipe", { render: true });
+      }
+    });
 
     // Resume wherever the user left off, but skip phases that no
     // longer make sense (e.g. fewer than 2 liked events for battles).
@@ -42,6 +50,12 @@ const App = {
     this.showView("ranking", { render: false });
   },
 
+  goToPlan() {
+    State.setPhase("plan");
+    Plan.render();
+    this.showView("plan", { render: false });
+  },
+
   showView(phase, { render }) {
     State.setPhase(phase);
 
@@ -51,7 +65,7 @@ const App = {
 
     document.querySelectorAll(".step").forEach((el) => {
       const stepPhase = el.dataset.phase;
-      const order = ["swipe", "battle", "ranking"];
+      const order = ["swipe", "battle", "ranking", "plan"];
       el.classList.remove("is-active", "is-done");
       if (stepPhase === phase) {
         el.classList.add("is-active");
@@ -64,6 +78,7 @@ const App = {
       if (phase === "swipe") Swipe.render();
       if (phase === "battle") Battle.render();
       if (phase === "ranking") Ranking.render();
+      if (phase === "plan") Plan.render();
     }
   }
 };

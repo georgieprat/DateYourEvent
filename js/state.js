@@ -4,19 +4,25 @@
  * Shape of the persisted object:
  * {
  *   version: 1,
- *   phase: "swipe" | "battle" | "ranking",
+ *   phase: "swipe" | "battle" | "ranking" | "plan",
  *   swipeIndex: number,                 // position in EVENTS during swipe phase
  *   decisions: { [eventId]: "in" | "out" },
  *   ratings:   { [eventId]: number },   // Elo-style rating, only for "in" events
  *   comparisons: { [eventId]: number }, // how many battles each event has been in
  *   lastPair: [eventId, eventId] | null,
- *   totalBattles: number
+ *   totalBattles: number,
+ *   selected: { [eventId]: true }       // events picked in the "plan" phase
  * }
+ *
+ * TOKEN_BUDGET caps how many tokens worth of events can be selected in
+ * the plan phase. Each event's `tokenCost` field (e.g. "12 \ud83e\ude99") is
+ * parsed for its leading number.
  */
 
 const STORAGE_KEY = "event-swipe-app:v1";
 const STARTING_RATING = 1000;
 const K_FACTOR = 32;
+const TOKEN_BUDGET = 25;
 
 const State = {
   data: null,
@@ -32,6 +38,7 @@ const State = {
 
     if (saved && saved.version === 1) {
       this.data = saved;
+      if (!this.data.selected) this.data.selected = {};
     } else {
       this.data = {
         version: 1,
@@ -42,7 +49,8 @@ const State = {
         comparisons: {},
         history: [],
         lastPair: null,
-        totalBattles: 0
+        totalBattles: 0,
+        selected: {}
       };
     }
     return this.data;
@@ -205,6 +213,56 @@ const State = {
     return [...this.getLikedEvents()].sort(
       (a, b) => this.getRating(b.id) - this.getRating(a.id)
     );
+  },
+
+  // ---- Plan / token budget helpers -------------------------------------------------
+
+  getTokenCost(event) {
+    if (typeof event.tokenCost === "number") return event.tokenCost;
+    if (typeof event.tokenCost === "string") {
+      const match = event.tokenCost.match(/\d+/);
+      if (match) return parseInt(match[0], 10);
+    }
+    return 0;
+  },
+
+  isSelected(eventId) {
+    return !!this.data.selected[eventId];
+  },
+
+  getUsedTokens() {
+    return this.getRankedEvents().reduce(
+      (sum, e) => sum + (this.isSelected(e.id) ? this.getTokenCost(e) : 0),
+      0
+    );
+  },
+
+  getRemainingTokens() {
+    return TOKEN_BUDGET - this.getUsedTokens();
+  },
+
+  // Whether `event` could be turned ON without exceeding the budget.
+  canAfford(event) {
+    if (this.isSelected(event.id)) return true;
+    return this.getTokenCost(event) <= this.getRemainingTokens();
+  },
+
+  toggleSelected(eventId) {
+    const event = EVENTS.find((e) => e.id === eventId);
+    if (!event) return;
+
+    if (this.isSelected(eventId)) {
+      delete this.data.selected[eventId];
+    } else if (this.canAfford(event)) {
+      this.data.selected[eventId] = true;
+    } else {
+      return; // over budget — ignore
+    }
+    this.save();
+  },
+
+  getSelectedEvents() {
+    return this.getRankedEvents().filter((e) => this.isSelected(e.id));
   },
 
   // ---- Phase transitions -------------------------------------------------

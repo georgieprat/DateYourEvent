@@ -132,6 +132,34 @@ button:focus-visible,
   gap: 14px;
 }
 
+.header-right {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.reset-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid rgba(244, 236, 216, 0.25);
+  color: var(--color-cream-on-dark);
+  opacity: 0.55;
+  border-radius: 100px;
+  padding: 6px 12px;
+  line-height: 1;
+  transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+
+.reset-btn:hover,
+.reset-btn:focus-visible {
+  opacity: 1;
+  border-color: var(--color-no);
+  color: var(--color-no);
+}
+
 .step {
   display: flex;
   flex-direction: column;
@@ -357,6 +385,61 @@ button:focus-visible,
   color: var(--color-ink);
 }
 
+.ticket-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ticket-token {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 100px;
+  color: var(--color-ink);
+  background: rgba(242, 183, 5, 0.22);
+}
+
+/* Multi-date pills */
+.date-pills-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.date-pills-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+.date-pills-row {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin: 0 -2px;
+  /* fade the right edge a touch so the scroll affordance reads intentionally */
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 18px), transparent 100%);
+  mask-image: linear-gradient(90deg, #000 calc(100% - 18px), transparent 100%);
+}
+
+.date-pill {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border: 1px solid var(--color-paper-edge);
+  border-radius: 100px;
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
 /* ==========================================================================
    VIEW 1 — Swipe
    ========================================================================== */
@@ -540,15 +623,82 @@ button:focus-visible,
   gap: 10px;
 }
 
+/* Budget bar (token meter) */
+.budget-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.budget-track {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(244, 236, 216, 0.12);
+  overflow: hidden;
+}
+
+.budget-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--color-accent);
+  border-radius: 4px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.budget-fill.is-full {
+  background: var(--color-yes);
+}
+
+.budget-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
 .ranking-item {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 14px;
   padding: 14px 16px;
   border-radius: 14px;
   background: var(--color-bg-soft);
   border: 1px solid rgba(244, 236, 216, 0.08);
+  transition: opacity 0.2s ease;
+}
+
+.ranking-item[data-affordable="false"] {
+  opacity: 0.4;
+}
+
+.ranking-pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.ranking-pick input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--color-yes);
+  cursor: pointer;
+}
+
+.ranking-pick input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+}
+
+.ranking-pick-cost {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  white-space: nowrap;
+  opacity: 0.75;
 }
 
 .ranking-rank {
@@ -699,6 +849,118 @@ button:focus-visible,
   font-size: 14px;
   line-height: 1.5;
   max-width: 320px;
+}
+
+/* ==========================================================================
+   VIEW 4 — Plan
+   ========================================================================== */
+
+.plan-list {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.plan-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--color-bg-soft);
+  border: 1px solid rgba(244, 236, 216, 0.08);
+}
+
+.plan-emoji {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.plan-title {
+  margin: 0 0 4px;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.plan-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--color-cream-on-dark);
+  opacity: 0.6;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.plan-cost {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: rgba(242, 183, 5, 0.22);
+  white-space: nowrap;
+}
+
+.plan-share,
+.plan-calendar {
+  margin-bottom: 22px;
+}
+
+.plan-share h2,
+.plan-calendar h2 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 10px;
+}
+
+.plan-calendar p {
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.7;
+}
+
+.plan-textarea {
+  width: 100%;
+  resize: vertical;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.plan-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.plan-actions .btn-secondary {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plan-footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
 }
 
 /* ==========================================================================

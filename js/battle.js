@@ -53,6 +53,13 @@ const Battle = {
     progressRow.style.display = "";
     empty.hidden = true;
 
+    State.extendBattleTarget();
+
+    if (State.isBattleCapReached()) {
+      App.goToRanking();
+      return;
+    }
+
     this.updateProgress();
     this.renderPair();
   },
@@ -107,12 +114,16 @@ const Battle = {
 
     setTimeout(() => {
       this.updateProgress();
-      this.renderPair();
+      if (State.isBattleCapReached()) {
+        App.goToRanking();
+      } else {
+        this.renderPair();
+      }
     }, 200);
   },
 
   updateProgress() {
-    const total = State.recommendedBattleCount();
+    const total = State.data.battleTarget ?? State.recommendedBattleCount();
     const done = State.data.totalBattles;
     const pct = total === 0 ? 100 : Math.min(100, Math.round((done / total) * 100));
     document.getElementById("battle-progress-fill").style.width = pct + "%";

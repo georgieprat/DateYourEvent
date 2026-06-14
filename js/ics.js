@@ -88,7 +88,8 @@ function buildICS(events) {
       }
 
       lines.push(`SUMMARY:${escapeICSText(summary)}`);
-      if (event.location) lines.push(`LOCATION:${escapeICSText(event.location)}`);
+      const location = getLocationForDate(event, i);
+      if (location) lines.push(`LOCATION:${escapeICSText(location)}`);
 
       let description = event.description || "";
       if (event.price) description += (description ? "\n" : "") + `Price: ${event.price}`;

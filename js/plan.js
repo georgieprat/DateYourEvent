@@ -51,7 +51,8 @@ const Plan = {
     li.className = "plan-item";
 
     const dateLabel = formatDateSummary(event.date);
-    const metaParts = [dateLabel, event.location].filter(Boolean);
+    const locationLabel = formatLocationSummary(event);
+    const metaParts = [dateLabel, locationLabel].filter(Boolean);
 
     li.innerHTML = `
       <span class="plan-emoji" aria-hidden="true">${getCategoryEmoji(event.category)}</span>
@@ -74,7 +75,8 @@ const Plan = {
       lines.push(`${i + 1}. ${getCategoryEmoji(event.category)} ${event.title}`);
       const dateLabel = formatDatesForShare(event.date);
       if (dateLabel) lines.push(`   📅 ${dateLabel}`);
-      if (event.location) lines.push(`   📍 ${event.location}`);
+      const locationLabel = formatLocationSummary(event);
+      if (locationLabel) lines.push(`   📍 ${locationLabel}`);
       lines.push("");
     });
 

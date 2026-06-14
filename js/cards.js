@@ -6,6 +6,12 @@
  *   - a single string:  "2026-07-15"
  *   - an array of strings: ["2026-08-06", "2026-10-18", ...]
  * Arrays are shown as a row of small date pills.
+ *
+ * "location" can be either:
+ *   - a single string (or one-element array): same venue for every date
+ *   - an array matching "date" in length: location[i] is the venue for date[i]
+ * If an event has more than one distinct venue, the card shows the
+ * first one plus a "+N more venues" badge (full list on hover/long-press).
  */
 
 function parseDate(dateStr) {
@@ -109,6 +115,60 @@ function getCategoryEmoji(category) {
 }
 
 /**
+ * "location" on an event can be either:
+ *   - a single string (or a one-element array): applies to every date
+ *   - an array matching "date" in length: location[i] goes with date[i]
+ *
+ * Returns the venue that corresponds to a given date index.
+ */
+function getLocationForDate(event, index) {
+  const location = event.location;
+  if (Array.isArray(location)) {
+    if (location.length <= 1) return location[0] || "";
+    return location[index] !== undefined ? location[index] : location[0];
+  }
+  return location || "";
+}
+
+/**
+ * Unique, order-preserving list of venues an event takes place at,
+ * across all of its dates.
+ */
+function getUniqueLocations(event) {
+  const location = event.location;
+  if (Array.isArray(location)) {
+    return [...new Set(location.filter(Boolean))];
+  }
+  return location ? [location] : [];
+}
+
+/**
+ * Location line for a ticket card: shows the first venue, plus a small
+ * "+N more venues" badge (full list in a tooltip) if the event happens
+ * at more than one place depending on the date.
+ */
+function buildLocationMarkup(event) {
+  const unique = getUniqueLocations(event);
+  if (unique.length === 0) return "";
+  if (unique.length === 1) {
+    return `<div class="ticket-meta"><span>${unique[0]}</span></div>`;
+  }
+  const extra = unique.length - 1;
+  const tooltip = unique.join(" • ");
+  return `<div class="ticket-meta"><span>${unique[0]}</span><span class="location-extra" title="${tooltip}">+${extra} more venue${extra > 1 ? "s" : ""}</span></div>`;
+}
+
+/**
+ * Compact venue summary for the ranking and plan lists.
+ */
+function formatLocationSummary(event) {
+  const unique = getUniqueLocations(event);
+  if (unique.length === 0) return "";
+  if (unique.length === 1) return unique[0];
+  return `${unique[0]} +${unique.length - 1} more`;
+}
+
+/**
  * Builds the inner HTML for a ticket card.
  * Returns a string of HTML — callers wrap it in their own container element.
  */
@@ -127,10 +187,9 @@ function buildTicketCardHTML(event) {
       <div class="ticket-perf"></div>
       <div class="ticket-stub">
         ${buildDateMarkup(event)}
-        ${event.location ? `<div class="ticket-meta"><span>${event.location}</span></div>` : ""}
+        ${buildLocationMarkup(event)}
         ${event.description ? `<p class="ticket-description">${event.description}</p>` : ""}
         <div class="ticket-tags">
-          
           ${event.tokenCost ? `<span class="ticket-token">${event.tokenCost}</span>` : ""}
         </div>
       </div>

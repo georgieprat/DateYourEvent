@@ -39,6 +39,7 @@ const State = {
     if (saved && saved.version === 1) {
       this.data = saved;
       if (!this.data.selected) this.data.selected = {};
+      if (this.data.battleTarget === undefined) this.data.battleTarget = null;
     } else {
       this.data = {
         version: 1,
@@ -50,6 +51,7 @@ const State = {
         history: [],
         lastPair: null,
         totalBattles: 0,
+        battleTarget: null,
         selected: {}
       };
     }
@@ -205,6 +207,23 @@ const State = {
     if (n < 2) return 0;
     // Roughly: everyone gets compared a couple of times on average.
     return Math.max(n - 1, Math.ceil(n * 1.5));
+  },
+
+  // Sets (or extends) the battle target -- the number of total battles
+  // at which the battle phase auto-advances to the ranking. Call this
+  // whenever entering the battle phase. If the target hasn't been set
+  // yet, or it's already been reached, it's pushed forward by another
+  // "recommended" round -- this lets "Refine with more battles" grant
+  // an additional round each time it's pressed.
+  extendBattleTarget() {
+    if (this.data.battleTarget == null || this.data.totalBattles >= this.data.battleTarget) {
+      this.data.battleTarget = this.data.totalBattles + this.recommendedBattleCount();
+      this.save();
+    }
+  },
+
+  isBattleCapReached() {
+    return this.data.battleTarget != null && this.data.totalBattles >= this.data.battleTarget;
   },
 
   // ---- Ranking phase helpers -------------------------------------------------

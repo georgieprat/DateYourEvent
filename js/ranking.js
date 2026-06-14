@@ -76,9 +76,10 @@ const Ranking = {
     li.dataset.tier = tier;
 
     const dateLabel = formatDateSummary(event.date);
+    const locationLabel = formatLocationSummary(event);
     const metaParts = [];
     if (dateLabel) metaParts.push(dateLabel);
-    if (event.location) metaParts.push(event.location);
+    if (locationLabel) metaParts.push(locationLabel);
     if (event.category) metaParts.push(event.category);
 
     const selected = State.isSelected(event.id);

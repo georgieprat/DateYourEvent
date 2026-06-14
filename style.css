@@ -287,6 +287,7 @@ button:focus-visible,
   color: var(--color-cream-on-dark);
   background-size: cover;
   background-position: center;
+  touch-action: none;
 }
 
 .ticket-poster::after {
@@ -352,6 +353,10 @@ button:focus-visible,
   display: flex;
   flex-direction: column;
   gap: 10px;
+  overflow-y: auto;
+  min-height: 0;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
 
 .ticket-meta {
@@ -366,6 +371,16 @@ button:focus-visible,
 .ticket-meta span strong {
   color: var(--color-ink);
   font-weight: 600;
+}
+
+.location-extra {
+  font-size: 11px;
+  opacity: 0.7;
+  border: 1px solid var(--color-paper-edge);
+  border-radius: 100px;
+  padding: 2px 8px;
+  white-space: nowrap;
+  cursor: help;
 }
 
 .ticket-description {
@@ -454,7 +469,6 @@ button:focus-visible,
 .swipe-card {
   position: absolute;
   inset: 0;
-  touch-action: none;
   will-change: transform;
   transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s ease;
 }

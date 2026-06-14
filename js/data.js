@@ -57,7 +57,7 @@ const EVENTS = [
     category: "Experience",
     date: ["2026-09-06","2026-11-15"],
     time: "19:30",
-    location: "Theater im Park, Globe Wien (Marx Halle)",
+    location: ["Theater im Park", "Globe Wien (Marx Halle)"],
     price: "26.40€",
     description:
       "Im Fernsehen reden sie über Politik. Nie über Sport. Dabei weiß Peter über Sport fast noch mehr als über Politik. Armin ist es ein Rätsel, wie man sich für Sport überhaupt interessieren kann. Außer für Curling. Aber das verachtet Peter. Auf der Bühne werden sie trotzdem ein wenig über Sport reden, viel über Politik und übereinander. Wie immer ziemlich schnell.",
@@ -83,7 +83,7 @@ const EVENTS = [
     category: "Comedy",
     date: ["2026-08-06", "2026-10-18", "2026-10-27", "2026-11-09", "2026-11-27", "2026-11-29", "2026-12-14"],
     time: "19:30",
-    location: "Theater im Park, Stadtsaal, Globe Wien (Marx Halle)",
+    location: ["Theater im Park", "Stadtsaal", "Stadtsaal", "Stadtsaal", "Globe Wien (Marx Halle)", "Stadtsaal", "Stadtsaal"],
     price: "35€",
     description:
       "Paulus geht in seinem Solo-Programm humorvoll seinen Tinder-Date-Erfahrungen und persönlichen Geschichten auf den Grund.",

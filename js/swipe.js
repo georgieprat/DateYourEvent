@@ -135,6 +135,8 @@ const Swipe = {
   // ---- Drag handling -------------------------------------------------
 
   attachDragHandlers(card, event) {
+    const handle = card.querySelector(".ticket-poster");
+
     const onPointerDown = (e) => {
       this.drag = {
         startX: e.clientX,
@@ -143,7 +145,7 @@ const Swipe = {
         moved: false
       };
       card.classList.add("dragging");
-      card.setPointerCapture?.(e.pointerId);
+      handle.setPointerCapture?.(e.pointerId);
     };
 
     const onPointerMove = (e) => {
@@ -187,9 +189,9 @@ const Swipe = {
       this.drag = null;
     };
 
-    card.addEventListener("pointerdown", onPointerDown);
-    card.addEventListener("pointermove", onPointerMove);
-    card.addEventListener("pointerup", onPointerUp);
-    card.addEventListener("pointercancel", onPointerUp);
+    handle.addEventListener("pointerdown", onPointerDown);
+    handle.addEventListener("pointermove", onPointerMove);
+    handle.addEventListener("pointerup", onPointerUp);
+    handle.addEventListener("pointercancel", onPointerUp);
   }
 };

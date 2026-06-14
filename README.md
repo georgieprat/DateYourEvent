@@ -69,6 +69,42 @@ Oct", ...). The final calendar export adds **one event per date**,
 labeled "(option 1 of 4)" etc., so the recipient can add them all and
 delete the ones they don't end up choosing.
 
+### Events with multiple venues
+
+If an event's venue changes depending on the date, set `location` to an
+array of the **same length as `date`** — `location[i]` is the venue for
+`date[i]`:
+
+```js
+date:     ["2026-08-06", "2026-10-18", "2026-11-29"],
+location: ["Venue A, Vienna", "Venue A, Vienna", "Venue B, Vienna"]
+```
+
+If `location` is a single string (or a one-element array), it applies to
+every date — nothing extra to do for the common case of one venue with
+several dates.
+
+On the card, only the first venue is shown, plus a small "+N more
+venues" badge if there's more than one (hover/long-press it to see the
+full list). The ranking, plan, and share views show the same compact
+summary. The calendar export uses the correct venue for each date's
+entry.
+
+### Long descriptions
+
+The description, price, and token cost sit in a scrollable area below
+the poster image — drag the poster image itself (or use the ✕ / ✓
+buttons) to swipe, and scroll within the lower part of the card to read
+longer descriptions.
+
+### Battle cap
+
+The battle phase automatically advances to the Lineup once a target
+number of battles is reached (roughly 1.5x the number of liked events).
+"Refine with more battles" grants one more full round on top of that.
+The "See my lineup" button always stays available as a manual way to
+jump ahead.
+
 ### Token budget
 
 `tokenCost` controls how much of the 25-token budget (see `TOKEN_BUDGET`

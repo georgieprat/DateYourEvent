@@ -39,6 +39,7 @@ function buildTicketCardHTML(event) {
         </div>
         ${event.description ? `<p class="ticket-description">${event.description}</p>` : ""}
         ${event.price ? `<span class="ticket-price">${event.price}</span>` : ""}
+        ${event.tokenCost ? `<span class="ticket-price">${event.tokenCost}</span>` : ""}
       </div>
     </div>
   `;

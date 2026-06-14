@@ -396,7 +396,7 @@ button:focus-visible,
 
 .battle-card .ticket-description-wrap {
   position: relative;
-  max-height: 4.7em;
+  max-height: 1.6em;
   overflow: hidden;
   transition: max-height 0.25s ease;
 }

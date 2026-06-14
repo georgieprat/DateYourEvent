@@ -188,7 +188,12 @@ function buildTicketCardHTML(event) {
       <div class="ticket-stub">
         ${buildDateMarkup(event)}
         ${buildLocationMarkup(event)}
-        ${event.description ? `<p class="ticket-description">${event.description}</p>` : ""}
+        ${event.description ? `
+        <div class="ticket-description-wrap">
+          <p class="ticket-description">${event.description}</p>
+        </div>
+        <button class="ticket-description-toggle" type="button" aria-expanded="false">Show more</button>
+        ` : ""}
         <div class="ticket-tags">
           ${event.tokenCost ? `<span class="ticket-token">${event.tokenCost}</span>` : ""}
         </div>

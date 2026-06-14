@@ -86,12 +86,49 @@ const Battle = {
   },
 
   buildCardButton(event) {
-    const btn = document.createElement("button");
-    btn.className = "battle-card";
-    btn.dataset.eventId = event.id;
-    btn.innerHTML = buildTicketCardHTML(event);
-    btn.addEventListener("click", () => this.choose(event));
-    return btn;
+    const card = document.createElement("div");
+    card.className = "battle-card";
+    card.dataset.eventId = event.id;
+    card.setAttribute("role", "button");
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("aria-label", `Pick: ${event.title}`);
+    card.innerHTML = buildTicketCardHTML(event);
+
+    card.addEventListener("click", () => this.choose(event));
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        this.choose(event);
+      }
+    });
+
+    this.setupDescriptionToggle(card);
+
+    return card;
+  },
+
+  // Lets the description collapse to a few lines with a "Show more" /
+  // "Show less" toggle. If the text is short enough to fit without
+  // folding, the toggle (and its fade) is hidden entirely.
+  setupDescriptionToggle(card) {
+    const wrap = card.querySelector(".ticket-description-wrap");
+    const toggle = card.querySelector(".ticket-description-toggle");
+    if (!wrap || !toggle) return;
+
+    requestAnimationFrame(() => {
+      if (wrap.scrollHeight <= wrap.clientHeight + 2) {
+        wrap.classList.add("no-fold");
+        toggle.classList.add("is-hidden");
+      }
+    });
+
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const expanded = wrap.classList.toggle("is-expanded");
+      toggle.textContent = expanded ? "Show less" : "Show more";
+      toggle.setAttribute("aria-expanded", String(expanded));
+    });
   },
 
   choose(winnerEvent) {
@@ -100,14 +137,14 @@ const Battle = {
     const loserEvent = a.id === winnerEvent.id ? b : a;
 
     // Quick visual feedback before moving on
-    const buttons = this.arenaEl.querySelectorAll(".battle-card");
-    buttons.forEach((btn) => {
-      if (btn.dataset.eventId === winnerEvent.id) {
-        btn.classList.add("is-winner");
+    const cards = this.arenaEl.querySelectorAll(".battle-card");
+    cards.forEach((card) => {
+      if (card.dataset.eventId === winnerEvent.id) {
+        card.classList.add("is-winner");
       } else {
-        btn.classList.add("is-loser");
+        card.classList.add("is-loser");
       }
-      btn.disabled = true;
+      card.classList.add("is-disabled");
     });
 
     State.recordBattleResult(winnerEvent.id, loserEvent.id);

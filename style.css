@@ -389,6 +389,60 @@ button:focus-visible,
   margin: 0;
 }
 
+/* Description folding -- only active inside the battle arena */
+.ticket-description-toggle {
+  display: none;
+}
+
+.battle-card .ticket-description-wrap {
+  position: relative;
+  max-height: 4.7em;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+
+.battle-card .ticket-description-wrap::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 28px;
+  background: linear-gradient(180deg, rgba(251, 246, 236, 0) 0%, var(--color-surface) 80%);
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.battle-card .ticket-description-wrap.is-expanded {
+  max-height: 1000px;
+}
+
+.battle-card .ticket-description-wrap.is-expanded::after,
+.battle-card .ticket-description-wrap.no-fold::after {
+  opacity: 0;
+}
+
+.battle-card .ticket-description-toggle {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-top: -2px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  color: var(--color-accent);
+  cursor: pointer;
+}
+
+.battle-card .ticket-description-toggle.is-hidden {
+  display: none;
+}
+
 .ticket-price {
   align-self: flex-start;
   font-family: var(--font-mono);
@@ -485,6 +539,14 @@ button:focus-visible,
   flex: 1;
 }
 
+/* Swipe cards show the whole thumbnail, letterboxed on the poster's
+   category color; battle cards keep the cropped "cover" look. */
+.swipe-card .ticket-poster {
+  min-height: 220px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .swipe-stamp {
   position: absolute;
   top: 26px;
@@ -567,14 +629,20 @@ button:focus-visible,
 }
 
 .battle-card {
+  display: block;
   width: 100%;
   border: none;
   padding: 0;
   text-align: left;
   background: none;
   border-radius: var(--radius-card);
+  cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   position: relative;
+}
+
+.battle-card.is-disabled {
+  pointer-events: none;
 }
 
 .battle-card .ticket-card {
